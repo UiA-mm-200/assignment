@@ -1,0 +1,18 @@
+let tekstSvada = [
+    const fs = require('fs');
+
+/*let svadatekst = [
+
+    "Sykdommen Myelodysplastisk syndrom (MDS)"
+    "Myelodysplastisk syndrom er en samlebetegnelse for en gruppe blodkreftsykdommer."
+    "Disse blodkreftsykdommer springer ut fra de bloddannende stamcellene i benmargen."
+    "MDS kommer av en modningsforstyrrelse i benmargens stamceller."
+]
+
+]*/
+
+
+let tekstSvada = fs.readFileSync ("tekster.txt").split("\n");
+
+
+//const antallAvsnitt = process.argv.length >= 2 ? process.argv[2]:3;
