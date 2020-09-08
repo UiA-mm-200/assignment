@@ -2,7 +2,8 @@
 
 ## Bruk:
 node Gjett.js
-Gjett nummer mellom 1-10
+
+
 
 ## Eks
 node Gjett.js
