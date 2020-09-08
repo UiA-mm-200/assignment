@@ -1,5 +1,11 @@
 # MM-200 Oppgaver [Uke 37, 40]
 
+## Hvordan levere oppgaver.
+De fleste oppgaver skal leveres som PR her på Github.
+Men husk å legge til URL til PR i Canvas. Innleveringen på canvas er gjort slik at du skal kunne oppdatere den med flere PR etter som du jobber. 
+
+
+
 ## Gjør alle disse oppgavene.
 
 Anslått arbeidstid 0.5 til 1 time. 
