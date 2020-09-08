@@ -6,14 +6,37 @@
     <title>Nedtelling</title>
 </head>
 <body>
+    
+    Timer:
+    <select id="inpHours">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
 
-    <div id="message"></div>
-    <input id="inpHours" type="text">
-    <input id="inpNumMinutes" type="text">
-    <input id="inpNumSeconds" type="text">
-    <input id="inpMessage" type="text">
+    Minutter:
+    <select id="inpMinutes">
+        <option value="0">0</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+        <option value="60">60</option>
+    </select>
+
+    Sekunder:
+    <select id="inpSeconds">
+        <option value="0">0</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+        <option value="60">60</option>
+    </select>
+    <input id="inpMessage" type="text" placeholder="Melding">
     <br><br>
-    <button id="btn" onClick="test()">Start nedtelling</button>
+    <button id="btn" onClick="startCountdown()">Start nedtelling</button>
     <div id="nedTelling"></div>
     
 </body>
