@@ -64,3 +64,7 @@ Porgrammet skal kunne avsluttes med kommandoen stop.
 Brukeren skal kunne velge X eller O.  
 Spillet skal støtte 1P og 2P Hotseat.  
 Spillet skal ha en "high score liste" 
+
+- [ ] Snake  
+**Gjør du denne oppgaven så trenger du bare å gjøre en annen oppgave**  
+Implimenter spillet snake for spilling i konsoll. Må ha pickups og vegger etc.
