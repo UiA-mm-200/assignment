@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My document</title>
+</head>
+
+<body>
+    <h1>Here you can set a timer</h1>
+    <input type="text" id="Hour" value="0">
+    <input type="text" id="Minute" value="0">
+    <input type="text" id="Second" value="0">
+    <input type="text" id="endMessage" value="Enter desired end text">
+    <button onclick="startTimer()" id="myBtn1">Start your timer!</button>
+    <h2 id="timeIsUp"></h2>
+
+    <script>
+
+        function displayEndMessage(msg) {
+            document.getElementById("timeIsUp").innerHTML = msg;
+
+        }
+
+        function getValue(id) {
+            return document.getElementById(id).value;
+        }
+
+        function setValue(id, value) {
+            document.getElementById(id).value = value;
+        }
+
+        function getMiliseconds(hrs, min, sec) {
+            if (hrs != 0) {
+                hrs = hrs * 60 * 60;
+            }
+            else {
+                hrs = null
+            }
+
+            if (min != 0) {
+                min = min * 60;
+            }
+            else {
+                min = null
+            }
+
+            if (sec != 0) {
+                sec = sec;
+            }
+            else {
+                sec = null
+            }
+            return ((hrs + min + sec) * 1000);
+        }
+
+
+        function startTimer() {
+            var milisec = getMiliseconds(getValue("Hour"), getValue("Minute"), getValue("Second"));
+            document.getElementById("Hour").setAttribute('disabled', true);
+            document.getElementById("Minute").setAttribute('disabled', true);
+            document.getElementById("Second").setAttribute('disabled', true);
+            document.getElementById("endMessage").setAttribute('disabled', true);
+            document.getElementById("myBtn1").setAttribute('disabled', true);
+            var timerUpdate = setInterval(updateTimer, 1000);
+            function updateTimer() {
+                var currentMilisec = milisec - 1000;
+                milisec = currentMilisec;
+                formatTime(currentMilisec);
+
+                if (currentMilisec == 0) {
+                    clearInterval(timerUpdate);
+                    displayEndMessage(getValue("endMessage"));
+                }
+            }
+
+        }
+
+        function formatTime(milisec) {
+            var milliseconds = parseInt((milisec % 1000) / 100),
+                seconds = Math.floor((milisec / 1000) % 60),
+                minutes = Math.floor((milisec / (1000 * 60)) % 60),
+                hours = Math.floor((milisec / (1000 * 60 * 60)) % 24);
+
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+            setValue("Hour", hours);
+            setValue("Minute", minutes);
+            setValue("Second", seconds);
+
+        }
+    </script>
+
+</body>
+
+
+
+</html>
