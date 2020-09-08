@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess my number</title>
+</head>
+
+<body>
+
+    <label for="input1">Guess my number:</label>
+    <input id="input1" type="number">
+    <button id="button1">Guess</button>
+    <h2 id="text1"></h2>
+    <h3 id="text3"></h3>
+    <p id="text2"></p>
+
+</body>
+
+<script>
+
+    let input1 = document.getElementById("input1");
+    let button1 = document.getElementById("button1");
+    let myNumber = Math.floor((Math.random() * 10) + 1);
+    console.log(myNumber);
+
+    let clickCount = 0;
+
+
+
+    button1.addEventListener("click", function (evt) {
+        
+        clickCount++;
+        console.log(clickCount);
+
+        let guessNumber = input1.value;
+
+        if (guessNumber == myNumber) {
+            text1.innerHTML = "You guessed right!";
+
+            text3.innerHTML = "Number of guesses: " + clickCount;
+
+            text2.innerHTML = "Would you like to try again?";
+
+            let button2 = document.createElement("button");
+            button2.innerHTML = "Try again";
+            document.body.appendChild(button2);
+
+            button2.addEventListener("click", function () {
+                //console.log("Du trykket på knappen");
+                window.location.reload();
+            })
+
+        } else if (guessNumber < myNumber) {
+            text1.innerHTML = "The number is higher than " + guessNumber;
+        } else if (guessNumber > myNumber) {
+            text1.innerHTML = "The number is lower than " + guessNumber;
+        }
+    });
+
+
+
+
+
+
+
+
+</script>
+
+</html>

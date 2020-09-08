@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number of paragraphs</title>
+</head>
+
+<body>
+
+    <label for="input1">Number of paragraphs:</label>
+    <input id="input1" type="number">
+    <button id="button1">Submit</button>
+    <div id="div1"></div>
+
+</body>
+
+<script>
+
+    let input1 = document.getElementById("input1");
+    let button1 = document.getElementById("button1");
+
+    button1.addEventListener("click", function (evt) {
+
+        let numOfPara = input1.value;
+
+        for (let i = 1; i <= numOfPara; i++) {
+            let paragraph = document.createElement("p");
+            let node = document.createTextNode("Dette er et avsnitt.");
+            paragraph.appendChild(node);
+
+            let element = document.getElementById("div1");
+            element.appendChild(paragraph);
+        }
+
+    })
+
+
+
+</script>
+
+</html>
