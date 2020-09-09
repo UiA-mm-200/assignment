@@ -1,0 +1,23 @@
+let svadaTekst = [
+    ""Skrive trener.  
+Lag et programm som viser brukeren en tekst som skal skrives inn. Beregn tiden brukeren tar for å skrive inn hele teksten riktig.
+Gi tilbakemelding når brukeren skriver feil. Gi en oppsummering på slutten av antall trykk per sekund, antall feil osv. Ha varierende 
+norske tekster med ulik vanskilghets grad. Lagre rapport dataen til fil. 
+\n",
+    "Brukeren skal kunne angi en tekst fil. Scan filen, bereng ord frekvenser, LIX index og Gunning fog index.  
+Generer en rapport basert på det du har beregnet, inkulder annslått lesenivå leseren må ha for å kunne lese teksten. 
+Dersom bruker har angit en output fil, skriv raporten til den filen.  
+\n",
+    "D
+Bruker skal kunne angi flere timer, minutter og sekunder (t,m,s) som skall telles ned. Samt beskjeden som skal gis når nedtellingen er ferdig (msg)
+Programmet skal ikke blokere terminalen når nedtelling er startet. \n",
+    "Norge tar lederrolle i bekjempelsen av pandemien. Vi ser frem til å jobbe med sivilt samfunn for å sikre rettferdig fordeling av vaksiner, medisiner, testutstyr og helsetjenester.\n",
+    "Programmet skal kunne startes med en fil med nedtellinger og beskejder (en per linje, formatet t,m,s msg)
+Porgrammet skal kunne avsluttes med kommandoen stop.\n"
+];
+
+let antallAvsnitt = process.argv.length >=3 ? process.argv[2] : svadaTekst.length;
+
+for (let i = 0; i < antallAvsnitt; i++){
+    console.log(svadaTekst[i%svadaTekst.length]);
+}
