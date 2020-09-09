@@ -2,15 +2,24 @@ const readline = require("readline");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
+});
+
+rl.question ("Konverter et tall til romertall: ", function(input){
+    function toRoman(num){
+        let roman = " "; 
+        let romanNumerals =["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX","V","IV", "I"];
+        let numbers = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]; 
+    
+        for (let i=0; i<numbers.length; i++){
+            while (num >= numbers[i]){
+                roman = roman + romanNumerals[i];
+                num = num - numbers[i]; 
+            }
+        }
+        return roman; 
+    }
+    console.log(toRoman(input)); 
+    rl.close();  
 }); 
 
-let number = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]; 
-let romanNumber = ["I", "II", "II", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 
-
-
-
-rl.question ("skriv et tall fra 1-10", function(input){
-    let index = number.indexOf(input); 
-    console.log("Romertall: " + romanNumber[index]); 
-}); 
