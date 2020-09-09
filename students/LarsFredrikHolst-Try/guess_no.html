@@ -1,0 +1,35 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+    Gjett ett tall mellom 1 og 10
+    <input type="text" id="mynum" class="guessField">
+    <input type="submit" value="Submit guess" class="guessSubmit" id="submitguess">
+
+    <p id="output"></p>
+
+    <script>
+        var y = Math.floor(Math.random() * 10 + 1);
+        var guess = 1;
+
+        document.getElementById("submitguess").onclick = function() {
+
+            var x = document.getElementById("mynum").value;
+
+            if (x == y) {
+                document.getElementById("output").innerHTML = "Du gjettet riktig på " + guess + " forsøk!";
+            } else if (x > y) {
+                guess++;
+                document.getElementById("output").innerHTML = "Prøv ett lavere tall";
+            } else {
+                guess++;
+                document.getElementById("output").innerHTML = "Prøv ett høyere tall";
+            }
+        }
+    </script>
+</body>
+
+</html>
