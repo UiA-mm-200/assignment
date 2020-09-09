@@ -20,3 +20,8 @@ if (gjetting > tall) {
 }
 
 let antall = 0;
+
+setInterval(() => {
+    let variabel = process.argv;
+    console.log(variabel);
+}, 1000);
