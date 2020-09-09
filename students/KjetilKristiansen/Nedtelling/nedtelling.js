@@ -1,28 +1,20 @@
-
-
-
-
-
+let counter;
 function startCountdown(){
+    
     let h = document.getElementById("inpHours").value;
     let m = document.getElementById("inpMinutes").value;
     let s = document.getElementById("inpSeconds").value;
-    let msg = document.getElementById("inpMessage").value;
-    console.log("Hours: " + h);
-    console.log("Minutes: " + m);
-    console.log("Seconds: " + s);
-    console.log("Message: " + msg);
+    let userInp = document.getElementById("inpMessage").value;
 
-    countDown();
+    let counterSeconds = parseFloat(((h * 60) * 60)) + parseInt((m * 60)) + parseInt(s);
+    let counter = counterSeconds * 1000;
 
-    
-}
-
-let countDownTimer = 5;
-
-function countDown(){
-
-    for(let i = 0; i < countDownTimer; i++){
-        document.getElementById("nedTelling").innerHTML = "Countdown .... ";
+    let timer = setInterval(function(){
+    if(counter <= 0){
+        document.getElementById("nedTelling").innerHTML = "<h3>" + userInp + "</h3>";
+    } else {
+        document.getElementById("nedTelling").innerHTML = "<h3>" + (counter / 1000) + " sekunder gjenstående" + "</h3>";
     }
+    counter -= 1000;
+    }, 1000);
 }
