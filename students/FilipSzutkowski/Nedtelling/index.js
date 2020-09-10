@@ -2,10 +2,12 @@
 
 let dateObject = new Date('August 19, 1975');
 let startTime = new Date('August 19, 1975');
-let userHours = isNaN(grabFlag(`--hours`)) ? 0 : grabFlag(`--hours`);
-let userMinutes = isNaN(grabFlag(`--minutes`)) ? 0 : grabFlag(`--minutes`);
-let userSeconds = isNaN(grabFlag(`--seconds`)) ? 0 : grabFlag(`--seconds`);
+let calculatedTime = new Date('August 19, 1975');
+let userHours = isNaN(grabFlag(`--hours`)) ? 0 : Math.ceil(grabFlag(`--hours`));
+let userMinutes = isNaN(grabFlag(`--minutes`)) ? 0 : Math.ceil(grabFlag(`--minutes`));
+let userSeconds = isNaN(grabFlag(`--seconds`)) ? 0 : Math.ceil(grabFlag(`--seconds`));
 let intervalTimeMs = 0;
+let timePassed = 0;
 
 // Function calls
 
@@ -15,27 +17,28 @@ timeInterval();
 
 function timeInterval() {
     const interval = setInterval(() => {
-        displayTime(userHours, userMinutes, userSeconds)
+        displayTime()
     }, 1000);
 
-    intervalTimeMs = (userHours * 3600000) + (userMinutes * 60000) + (userSeconds * 1000);
-
-    startTime.setTime(Date.now());
+    intervalTimeOut = (userHours * 3600000) + (userMinutes * 60000) + (userSeconds * 1000);
+    calculatedTime.setHours(userHours);
+    calculatedTime.setMinutes(userMinutes);
+    calculatedTime.setSeconds(userSeconds + 1);
 
     setTimeout( () => {
         clearInterval(interval);
         process.exit(0);
-    }, intervalTimeMs);
-
-    console.log(intervalTimeMs);
+    }, intervalTimeOut + 2000);
 }
 
-function displayTime(hours, minutes, seconds) {
-    dateObject.setTime(Date.now() - startTime);
-    console.log(`${hours - dateObject.getUTCHours()}:${minutes - dateObject.getUTCMinutes()}:${seconds - dateObject.getUTCSeconds()}`);
+function displayTime() {
+    dateObject.setTime(calculatedTime - Date.now());
+    calculatedTime.setTime(calculatedTime.getTime() - 1000);
+    console.log(`${calculatedTime.getHours()}h:${calculatedTime.getMinutes()}m:${calculatedTime.getSeconds()}s`);
+
 }
 
 function grabFlag(flag) {
     let indexAfterFlag = process.argv.indexOf(flag) + 1; 
-    return process.argv[indexAfterFlag];
+    return parseFloat(process.argv[indexAfterFlag]);
 }
