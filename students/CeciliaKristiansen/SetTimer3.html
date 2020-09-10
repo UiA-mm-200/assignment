@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number of paragraphs</title>
+</head>
+
+<body>
+    <h1>Set countdown timer</h1>
+
+    <label for="hours">Hours:</label>
+    <br>
+    <input id="hours" type="number" placeholder="00">
+    <br>
+    <br>
+
+    <label for="minutes">Minutes:</label>
+    <br>
+    <input id="minutes" type="number" placeholder="00">
+    <br>
+    <br>
+
+    <label for="seconds">Seconds:</label>
+    <br>
+    <input id="seconds" type="number" placeholder="00">
+    <br>
+    <br>
+    <button id="submitTimeBtn">Submit time</button>
+    <br>
+    <br>
+
+    <label for="timeOutText">Show this when the time runs out:</label>
+    <br>
+    <input id="timeOutText">
+    <button id="timeOutBtn">Submit text</button>
+    <br>
+    <br>
+
+    <h2 id="timer">00:00:00</h2>
+
+    <button id="startBtn">Start countdown</button>
+
+
+</body>
+
+<script>
+
+    let hours = document.getElementById("hours");
+    //let hoursBtn = document.getElementById("hoursBtn");
+
+    let minutes = document.getElementById("minutes");
+    //let minutesBtn = document.getElementById("minutesBtn");
+
+    let seconds = document.getElementById("seconds");
+    //let secondsBtn = document.getElementById("secondsBtn");
+
+    let submitTimeBtn = document.getElementById("submitTimeBtn");
+
+    let timeOutText = document.getElementById("timeOutText");
+    let timeOutBtn = document.getElementById("timeOutBtn");
+
+    let timer = document.getElementById("timer");
+
+    let startBtn = document.getElementById("startBtn");
+
+
+    submitTimeBtn.addEventListener("click", function () {
+
+        if (hours.value == "") {
+            hours.value = "00";
+        }
+
+        if (minutes.value == "") {
+            minutes.value = "00";
+        }
+
+        if (seconds.value == "") {
+            seconds.value = "00";
+        }
+
+        timer.innerHTML = hours.value + ":" + minutes.value + ":" + seconds.value;
+
+    });
+
+    timeOutBtn.addEventListener("click", function () {
+
+    });
+
+    startBtn.addEventListener("click", function () {
+        //Dette fungerer ikke sånn som det skal 
+        let countdownHours = hours.value;
+        let countdownMinutes = minutes.value;
+        let countdownSeconds = seconds.value;
+
+        if (hours.value == 0) {
+
+            let minutesInterval = setInterval(function () {
+                countdownMinutes--;
+                console.log("min når de andre er 0 " + countdownMinutes);
+
+                timer.innerHTML = countdownHours + ":" + countdownMinutes + ":" + countdownSeconds;
+
+                if (countdownMinutes == 0) {
+                    clearInterval(minutesInterval);
+                }
+
+            }, 60 * 1000);
+
+        } else {
+
+            for (let k = 0; k < minutes.value; k++) {
+
+                let minutesInterval = setInterval(function () {
+
+                    countdownMinutes--;
+                    console.log("sek etter hvor mange min " + countdownMinutes);
+
+                    timer.innerHTML = countdownHours + ":" + countdownMinutes + ":" + countdownSeconds;
+
+                    if (countdownMinutes == 0) {
+                        countdownMinutes = 60;
+                        clearInterval(minutesInterval);
+                    }
+
+                }, 60 * 1000);
+            }
+
+        }
+
+        if (hours.value == 0 && minutes.value == 0) {
+
+            let secondsInterval = setInterval(function () {
+                countdownSeconds--;
+                console.log("sek når de andre er 0 " + countdownSeconds);
+
+                timer.innerHTML = countdownHours + ":" + countdownMinutes + ":" + countdownSeconds;
+
+                if (countdownSeconds == 0) {
+                    clearInterval(secondsInterval);
+                }
+
+            }, 1000);
+
+        } else {
+
+            for (let k = 0; k < minutes.value; k++) {
+
+                let secondsInterval = setInterval(function () {
+
+                    countdownSeconds--;
+                    console.log("sek etter hvor mange min " + countdownSeconds);
+
+                    timer.innerHTML = countdownHours + ":" + countdownMinutes + ":" + countdownSeconds;
+
+                    if (countdownSeconds == 0) {
+                        countdownSeconds = 60;
+                        clearInterval(secondsInterval);
+                    }
+
+                }, 1000); 
+            }
+
+        }
+
+
+    });
+
+
+
+</script>
+
+</html>
