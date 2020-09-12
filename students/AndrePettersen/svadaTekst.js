@@ -6,4 +6,5 @@ let output = [];
 for (let i = 0; i < antallAvsnitt; i++){
     output.push(svadaTekst[i]);
 }
+
 console.log(output.join("\n"));
