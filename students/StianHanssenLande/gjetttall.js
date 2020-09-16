@@ -1,22 +1,40 @@
-let tekst = "Gjett tallet mitt, det er mellom 1 og 10";
-console.log(tekst);
+const readline = require('readline');
 
-let tall = Math.floor(Math.random()*11) + 1;
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-let gjetting = parseInt(process.argv[2]);
-console.log(gjetting);
+let from = Math.floor((Math.random() * 1) + 1);
+let to = Math.floor((Math.random() * 10) + 10);
+let answer = Math.floor(Math.random() * (to - from + 1)) + from;
+let text = "Gjett tallet mellom " + from + " og " + to + ": ";
+let guesses = 0;
+let running = true;
 
-if (gjetting == tall) {
-    console.log("Riktig");
-    console.log("Vil du spille igjen");
-} else {
-    console.log("Feil");
+guessTheNumber();
+
+function guessTheNumber() {
+    rl.question(text, (input) => {
+        guess = input;
+        guesses++;
+
+        if (guess > answer) {
+            console.log("Tallet er lavere");
+        } else if (guess < answer) {
+            console.log("Tallet er høyere");
+        } else {
+            console.log("Du gjettet riktig på " + guesses + " forsøk");
+            running = false;
+        }
+        rl.pause();
+    })
 }
 
-if (gjetting > tall) {
-    console.log("Lavere");
-} else if ( gjetting < tall) {
-    console.log("Høyere");
-}
-
-let antall = 0;
+rl.on("pause", function() {
+    if (running) {
+        guessTheNumber();
+    } else {
+        rl.close();
+    }
+}); 
