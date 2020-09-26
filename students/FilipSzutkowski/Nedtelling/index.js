@@ -1,13 +1,17 @@
+//Imports ------------------------------------------------------
+
+const Timer = require('./timer.js');
+const FlagGrabber = require('./flagGrabber.js');
+
 // Variables ---------------------------------------------------
 
-let calculatedTime = new Date('August 19, 1975');
-let userHours = isNaN(grabFlag(`--h`)) ? 0 : parseInt(Math.ceil(grabFlag(`--h`)));
-let userMinutes = isNaN(grabFlag(`--m`)) ? 0 : parseInt(Math.ceil(grabFlag(`--m`)));
-let userSeconds = isNaN(grabFlag(`--s`)) ? 0 : parseInt(Math.ceil(grabFlag(`--s`)));
-let message = grabFlag(`--msg`) === undefined ? `node` : grabFlag(`--msg`);
-let userMessage = message.includes(`node`) ? `Time has passed` : grabFlag(`--msg`);
-let intervalTimeMs = 0;
-let timePassed = 0;
+let flagGrabber = new FlagGrabber(process.argv);
+let userHours = flagGrabber.getFlagValue('--h', 'number', '0');
+let userMinutes = flagGrabber.getFlagValue('--m', 'number', '5');
+let userSeconds = flagGrabber.getFlagValue('--s', 'number', '5');
+let userMessage = flagGrabber.getFlagValue('--msg', 'text', 'Time has passed');
+let timeCalculation = new Timer(userHours, userMinutes, userSeconds);
+let intervalTimeOut = (userHours * 3600000) + (userMinutes * 60000) + (userSeconds * 1000);
 
 // Function calls
 
@@ -17,32 +21,22 @@ timeInterval();
 
 function timeInterval() {
     const interval = setInterval(() => {
-        displayTime()
-    }, 1000);
+        let time = timeCalculation.getTime();
 
-    intervalTimeOut = (userHours * 3600000) + (userMinutes * 60000) + (userSeconds * 1000);
-    calculatedTime.setHours(userHours);
-    calculatedTime.setMinutes(userMinutes);
-    calculatedTime.setSeconds(userSeconds + 1);
+        clearLineAndCursor();
+        process.stdout.write(time);
+
+    }, 1000);
 
     setTimeout( () => {
         clearInterval(interval);
         clearLineAndCursor();
         console.log(userMessage);
         process.exit(0);
+
     }, intervalTimeOut + 2000);
-}
 
-function displayTime() {
-    calculatedTime.setTime(calculatedTime.getTime() - 1000);
-    clearLineAndCursor();
-    process.stdout.write(`${calculatedTime.getHours()}h:${calculatedTime.getMinutes()}m:${calculatedTime.getSeconds()}s`);
-
-}
-
-function grabFlag(flag) {
-    let indexAfterFlag = process.argv.indexOf(flag) + 1; 
-    return process.argv[indexAfterFlag];
+    console.log(userSeconds);
 }
 
 function clearLineAndCursor() {
