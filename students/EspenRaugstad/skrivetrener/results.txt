@@ -1,0 +1,9 @@
+
+    ***** RESULTAT *****
+
+    Du hadde 106 feil.
+
+    Du brukte 30.7 klikk per sekund.
+
+    Alt i alt brukte du 3.5 sekunder.
+    
