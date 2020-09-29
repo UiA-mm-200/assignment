@@ -1,6 +1,0 @@
-# Skrive Trener
-
-## Bruk:
-
-
-## Eks
