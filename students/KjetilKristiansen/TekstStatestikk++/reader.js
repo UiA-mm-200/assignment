@@ -4,13 +4,6 @@ let chosenTxt;
 let lixResult;
 let outTxt;
 
-/*
-Tekst statestikk ++
-Brukeren skal kunne angi en tekst fil. Scan filen, bereng ord frekvenser, LIX index og Gunning fog index.
-Generer en rapport basert på det du har beregnet, inkulder annslått lesenivå leseren må ha for å kunne lese teksten.
-Dersom bruker har angit en output fil, skriv raporten til den filen.
-*/
-
 const userFile = process.argv[2];
 let userOutFile = process.argv[3];
 const filePath = "./file/" + userFile;
@@ -84,7 +77,6 @@ Annslått lesenivå: ${lixResult}`;
 function outputInfo(){
 
 if(userOutFile === "ignore"){
-    //console.log("ignored!")
     console.log(outTxt)
 }
 else if(userOutFile.length > 4){ //må være lengre enn 4. For å være nok til .txt feks
