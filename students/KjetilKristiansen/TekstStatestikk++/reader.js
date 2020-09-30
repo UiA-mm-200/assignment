@@ -12,6 +12,7 @@ const files = fs.readdirSync("./file/");
 files.push("test.txt");
 
 if(process.argv[2] === undefined){
+    clear()
     console.log("Usage: node reader.js <filename> <outputname>" + "\n" + "Example: node reader.js " + files[Math.floor(Math.random() * files.length)] + " output.txt")
 }else{
 
@@ -23,6 +24,7 @@ if(process.argv[2] === undefined){
         getText();
     }
     else{
+        clear()
         console.log("File does not exist: " + filePath);
     }
 }
@@ -77,6 +79,7 @@ Annslått lesenivå: ${lixResult}`;
 function outputInfo(){
 
 if(userOutFile === "ignore"){
+    clear()
     console.log(outTxt)
 }
 else if(userOutFile.length > 4){ //må være lengre enn 4. For å være nok til .txt feks
@@ -84,10 +87,16 @@ else if(userOutFile.length > 4){ //må være lengre enn 4. For å være nok til 
     
     fs.writeFile(outFilePath, outTxt, function(err){
         if(err) return console.log(err);
+        clear()
         console.log("Output file: " + outFilePath);
     });
 
 }else{
+    clear()
     console.log("Output filename: " + userOutFile + " is invalid.");
 }
+}
+
+function clear(){
+    console.clear();
 }

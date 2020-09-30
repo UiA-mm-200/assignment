@@ -20,11 +20,11 @@ let turn;
 let input = process.argv[2];
 
 if(process.argv[2] === undefined){
+    console.clear();
     console.log("Usage: node ThreeInARow.js start/restart\nnode ThreeInARow.js <1-9>" + "\nExample: node ThreeInARow.js " + (Math.floor(Math.random() * 9)+1));
 }else{
     if(input === "start") {
         checkFiles();
-        //checkBoard();
     }else if(input === "restart") {
         restartBoard();
     }else if(input.length >= 1){
@@ -86,6 +86,7 @@ function checkBoard(){
 function restartBoard(){
     fs.writeFile(file, fresh, function(err){
         if(err) return console.log(err);
+        console.clear();
         console.log("Restarted game!");
         checkBoard();
     });
@@ -96,13 +97,15 @@ function changeBoard(){
     if(input >= 1 && input <= 9){
 
         if(board[boardInp] === "X" || board[boardInp] === "O"){
+            console.clear();
             console.log(input + " has already been taken by: " + board[boardInp]);
         }
         else if(board[boardInp] === "0"){
+            console.clear();
             board[boardInp] = turn;
-            
             }
     }else{
+        console.clear();
         console.log("Has to be more than 1 or less than 9");
     }
 
@@ -122,21 +125,21 @@ function changeBoard(){
 
 function checkForThree(){
     if(board[0] === player1 && board[1] === player1 && board[2] === player1){player = "player1 (" + player1 + ")";win = true;updateGame();}
-    else if(board[3] === player1 && board[4] === player1 && board[5] === player1){player = "player1 (" + player1 + ")";gameWin();}
-    else if(board[6] === player1 && board[7] === player1 && board[8] === player1){player = "player1 (" + player1 + ")";gameWin();}
-    else if(board[0] === player1 && board[3] === player1 && board[6] === player1){player = "player1 (" + player1 + ")";gameWin();}
-    else if(board[1] === player1 && board[4] === player1 && board[7] === player1){player = "player1 (" + player1 + ")";gameWin();}
-    else if(board[2] === player1 && board[5] === player1 && board[8] === player1){player = "player1 (" + player1 + ")";gameWin();}
-    else if(board[0] === player1 && board[4] === player1 && board[8] === player1){player = "player1 (" + player1 + ")";gameWin();}
-    else if(board[2] === player1 && board[4] === player1 && board[6] === player1){player = "player1 (" + player1 + ")";gameWin();}
+    else if(board[3] === player1 && board[4] === player1 && board[5] === player1){player = "player1 (" + player1 + ")";updateGame();}
+    else if(board[6] === player1 && board[7] === player1 && board[8] === player1){player = "player1 (" + player1 + ")";updateGame();}
+    else if(board[0] === player1 && board[3] === player1 && board[6] === player1){player = "player1 (" + player1 + ")";updateGame();}
+    else if(board[1] === player1 && board[4] === player1 && board[7] === player1){player = "player1 (" + player1 + ")";updateGame();}
+    else if(board[2] === player1 && board[5] === player1 && board[8] === player1){player = "player1 (" + player1 + ")";updateGame();}
+    else if(board[0] === player1 && board[4] === player1 && board[8] === player1){player = "player1 (" + player1 + ")";updateGame();}
+    else if(board[2] === player1 && board[4] === player1 && board[6] === player1){player = "player1 (" + player1 + ")";updateGame();}
 
-    else if(board[3] === player2 && board[4] === player2 && board[5] === player2){player = "player2 (" + player2 + ")";gameWin();}
-    else if(board[6] === player2 && board[7] === player2 && board[8] === player2){player = "player2 (" + player2 + ")";gameWin();}
-    else if(board[0] === player2 && board[3] === player2 && board[6] === player2){player = "player2 (" + player2 + ")";gameWin();}
-    else if(board[1] === player2 && board[4] === player2 && board[7] === player2){player = "player2 (" + player2 + ")";gameWin();}
-    else if(board[2] === player2 && board[5] === player2 && board[8] === player2){player = "player2 (" + player2 + ")";gameWin();}
-    else if(board[0] === player2 && board[4] === player2 && board[8] === player2){player = "player2 (" + player2 + ")";gameWin();}
-    else if(board[2] === player2 && board[4] === player2 && board[6] === player2){player = "player2 (" + player2 + ")";gameWin();}
+    else if(board[3] === player2 && board[4] === player2 && board[5] === player2){player = "player2 (" + player2 + ")";updateGame();}
+    else if(board[6] === player2 && board[7] === player2 && board[8] === player2){player = "player2 (" + player2 + ")";updateGame();}
+    else if(board[0] === player2 && board[3] === player2 && board[6] === player2){player = "player2 (" + player2 + ")";updateGame();}
+    else if(board[1] === player2 && board[4] === player2 && board[7] === player2){player = "player2 (" + player2 + ")";updateGame();}
+    else if(board[2] === player2 && board[5] === player2 && board[8] === player2){player = "player2 (" + player2 + ")";updateGame();}
+    else if(board[0] === player2 && board[4] === player2 && board[8] === player2){player = "player2 (" + player2 + ")";updateGame();}
+    else if(board[2] === player2 && board[4] === player2 && board[6] === player2){player = "player2 (" + player2 + ")";updateGame();}
 
     else{
         updateGame();
