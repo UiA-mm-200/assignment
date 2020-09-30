@@ -23,13 +23,34 @@ if(process.argv[2] === undefined){
     console.log("Usage: node ThreeInARow.js start/restart\nnode ThreeInARow.js <1-9>" + "\nExample: node ThreeInARow.js " + (Math.floor(Math.random() * 9)+1));
 }else{
     if(input === "start") {
-        checkBoard();
+        checkFiles();
+        //checkBoard();
     }else if(input === "restart") {
         restartBoard();
     }else if(input.length >= 1){
         checkBoard();
         changeBoard();
     }
+}
+
+function checkFiles(){
+    let boardFile = "board.txt";
+    let turnFile = "turn.txt";
+    if(fs.existsSync(boardFile)){
+        console.log(boardFile + " exists, skipped");
+    }else{
+        fs.writeFile(boardFile, fresh, function(err){
+            if(err) return console.log(err);
+        });
+    }
+    if(fs.existsSync(turnFile)){
+        console.log(turnFile + " exists, skipped");
+    }else{
+        fs.writeFile(turnFile, player1, function(err){
+            if(err) return console.log(err);
+        });
+    }
+    setTimeout(function(){checkBoard();}, 2000);
 }
 
 function checkBoard(){

@@ -1,6 +1,8 @@
 # Tekst Statestikk ++
 
 ## Bruk:
+Legg filen du vil sjekke i ./file
+
 Hvis du bare ønsker å sjekke filen:
 node reader.js <filename>
 
