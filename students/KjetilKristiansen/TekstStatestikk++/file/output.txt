@@ -1,5 +1,0 @@
-Tekst Statestikk++
-
-Filen som ble sjekket: test.txt
-Lix score: 41.33
-Annslått lesenivå: Litt vanskelig å lese (Middels/Høy)
