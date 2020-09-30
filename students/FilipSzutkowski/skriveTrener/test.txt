@@ -1,0 +1,5 @@
+Norge er et land som ligger nord-vest i Europa. Landet har drøyt fem millioner innbyggere. Norge grenser til Sverige, Finland og Russland. Språket i landet er norsk. Det finnes to varianter av norsk: bokmål og nynorsk. Norsk ligner på svensk og dansk. De fleste innbyggerne i Norge er nordmenn, men det finnes også flere minoriteter, blant annet samer. Dessuten er det omtrent 900 000 innvandrere i landet.
+
+if (userWord == textArray[userIndex + 1] || userWord == textArray[userIndex - 1]) {
+            ++wordsSkipped;
+        }
