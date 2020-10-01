@@ -1,36 +1,43 @@
 const fs = require('fs');
 const readline = require('readline');
+const TextWorker = require('./TextWorker');
+
+let text;
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-const text = fs.readFileSync('test2.txt', 'utf-8');
 let timeInSeconds = 0;
-const timer = setInterval(() => {
-    ++timeInSeconds;
-}, 1000)
 
 const submitUserText = userText => {
-    const textArray = text.split(' ');
-    const userTextArray = userText.split(' ');
-    let uncorrectWords = 0;
-    let wordsSkipped = 0; 
-
-    textArray.forEach((word, index) => {
-        if (word != userTextArray[index - wordsSkipped]) {
-            ++uncorrectWords;
-
-            if (userTextArray[index - wordsSkipped] == textArray[index - 1] || userTextArray[index - wordsSkipped] == textArray[index + 1]) {
-                ++wordsSkipped;
-            }
-        }
-    })
-
-    console.log(textArray);
-    console.log(userTextArray);
-    console.log(`Your time was: ${timeInSeconds} seconds! \n Uncorrect words: ${uncorrectWords}! \n Good job!`);
+    let worker = new TextWorker(text, userText);
+    let typingStats = worker.calculateTypingStats(timeInSeconds, userText);
+    let uncorrectWordsList = worker.uncorrectWordsString.length > 0 ? `Liste med ord du skrev feil eller manglet: \n${worker.uncorrectWordsString}` : 'PERFEKT!';
+    let rapport = `\nTiden din var: ${timeInSeconds} sekunder! \nAntall feilskrevet ord: ${worker.uncorrectWordsAmount}! \n${uncorrectWordsList}\n\nHastigheten din var ${typingStats.WPM} ord i minuttet! \nNøyaktigheten din ligger på ${typingStats.accuracy} %! \n`;
+    
+    console.log(`${rapport}\n\nThe rapport has been saved to rapport.txt inside this directory.`);
+    fs.writeFileSync('rapport.txt', rapport, 'utf-8');
     process.exit(0);
-}
+};
 
+const submitLevel = levelInput => {
+    const levelChoice = levelInput.toLowerCase();
 
-rl.question(`\n ${text} \n\n Skriv dette så raskt som mulig!\n\n`, submitUserText);
+    if (levelChoice != 'lett' && levelChoice != 'middels' && levelChoice != 'vanskelig') {
+        text = fs.readFileSync('texts/lett.txt', 'utf-8');
+    } else {
+        text = fs.readFileSync(`texts/${levelChoice}.txt`, 'utf-8');
+    }
+
+    rl.pause();
+
+    const timer = setInterval(() => {
+        ++timeInSeconds;
+    }, 1000);
+
+    console.clear();
+    rl.question(`\n ${text} \n\nSkriv dette så raskt som mulig!\n\n`, submitUserText);
+};
+
+console.clear();
+rl.question(`\nLett\nMiddels\nVanskelig\nSkriv inn vanskelighetsgraden av teksten: `, submitLevel);
