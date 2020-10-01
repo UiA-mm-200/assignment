@@ -15,7 +15,7 @@ const submitUserText = userText => {
     let uncorrectWordsList = worker.uncorrectWordsString.length > 0 ? `Liste med ord du skrev feil eller manglet: \n${worker.uncorrectWordsString}` : 'PERFEKT!';
     let rapport = `\nTiden din var: ${timeInSeconds} sekunder! \nAntall feilskrevet ord: ${worker.uncorrectWordsAmount}! \n${uncorrectWordsList}\n\nHastigheten din var ${typingStats.WPM} ord i minuttet! \nNøyaktigheten din ligger på ${typingStats.accuracy} %! \n`;
     
-    console.log(`${rapport}\n\nThe rapport has been saved to rapport.txt inside this directory.`);
+    console.log(`${rapport}\n\nRapporten er lagra i rapport.txt i mappa du kjører programmet fra.`);
     fs.writeFileSync('rapport.txt', rapport, 'utf-8');
     process.exit(0);
 };
