@@ -1,70 +1,101 @@
-# MM-200 Oppgaver [Uke 37, 40]
+# MM-200 Oppgaver [Uke 40, 44]
 
-## Hvordan levere oppgaver.
-De fleste oppgaver skal leveres som PR her på Github.
-Men husk å legge til URL til PR i Canvas. Innleveringen på canvas er gjort slik at du skal kunne oppdatere den med flere PR etter som du jobber. 
+## VIKTIG! Hvordan gjøre oppgaver.
+Alle oppgavene skal leveres som PR (pull request) på github (https://github.com/mm-200/assignment).   
+Totalt skal du ha 2 PR, en til onsdagens innlevering og en for modulen (vi er i modul 3 på canvas)   
+På canvas leverer du linken til din PR.
 
+For alle oppgavene skal Express.js brukes til å skrive serveren.   
+Utover det er det tillat å bruke body-parser.js, men ingen andre tredjeparts bibliotek.  
 
+Sett port for server ved å bruke <code>process.env.PORT || 8080</code>   
+Det er ikke eksplesitt utledet i alle oppgaver, men det er forventet at serveren gjør meningsfylt feilhåndtering.
+Å ikke ha feilhåndtering er det samme som ikke å ha fulført oppgaven!   
+Det er også forventet at du har et web bruker grensesnitt.    
+**Server fil skal ALTID hete server.js**    
+**Oppgaver skal altid ligge i sin egen separate mappe under din student mappe**   
+**Følg beskrivelsen av oppgaven nøye, Kommer til å bruke delvis automatiske verktøy til å godkjenne oppgaver.**
 
-## Gjør alle disse oppgavene.
+## Gjør alle disse oppgavene (Innen onsdag).
 
 Anslått arbeidstid 0.5 til 1 time. 
 
-- [ ] Opprett konto på github
-- [ ] Gjenomfør denne tutorialen https://guides.github.com/activities/hello-world/ 
-- [ ] Les https://guides.github.com/activities/forking/  
-- Gjør en fork av dette repoet.  
-- Legg til en mappe students/dit_navn.  
-- Ta de nødvendige skrittene for å opprette en pull request mot dette repoet (som i artikkelen)
-- Lever URL til PR på Canvas.
+### Dagens tekniske utrykk.  
 
-## Gjør 3 av disse oppgavene (Innen onsdag)
+I resurs mappen finnes filen ord.csv. Du skal lage en servertjeneste som returnerer dagens ord og forklaring dersom en dato ikke er angitt. Dersom datoen er angitt skal ordet for den dagen returneres. En gitt dato skal alltid returnere samme ord og forklaring. Ord skal ikke velges i den rekke følgen de ligger i filen (med andre ord 1.Januar skal ikke gi ordet "abort" påfølgt av "access" for 2.januar osv.)
+
+Lag en enkel html side som benytter seg av server api’et du akkurat har laget, til å vise ord og forklaring for dagens dato. 
+
+API
+```http
+GET /api/wordOfTheDay/{dato} 
+```
+Server respons
+```javascript
+{
+  "word" : string,
+  "description" : string,
+}
+```
+
+## Gjør 2 av disse oppgavene (Innen onsdag)
 
 Anslått areidstid ca 3 timer.
 
-- [ ] Svada teks generator.  
-Brukeren skal kunne angi antall avsnitt som skal genereres. 
+### Svada teks generator.  
 
-- [ ] Tekst staestikk  
-Kalkuler frekvensen for vert enkelt ord.  
-Bruker skal kunne angi om listen du produsere er i stigende eller synkende rekkefølge med parameteren S.  
-S = 0 er stigende (og default), S = 1 er synkende  
-listen skal ha formatet frekvens Ord
+Lag en server tjeneste som retunerer det ønskede antall avsnitt med tilfeldig tekst.   
+Dersom antall ikke er angit, retuner tre avsnitt.   
+Server skal generer den tilfeldige teksten ved bruk av en modul (med andre ord, lag en modul for dette)  
 
-- [ ] Gjett tallet mitt.   
-Et spill hvor spilleren blir git spørsmålet "Gjett tallet mitt, det er mellom X og Y" (du bestemer X og Y). Spillet skal gi spilleren hint om tallet er høyere eller lavere.
-Til slutt skal spillet raportere hvor mange ganger spilleren har gjettet og spøre om man vil spille igjenn. 
+API
+```http
+GET /api/randomText/{paragraphs}
+```
+Server respons
+```javascript
+{
+  paragraphs:[String,String,... ]
+}
+```
 
-- [ ] Desimal tall til Romertall  
-Gitt et naturlig desimaltall, retuner riktig romertall. 
+### Nedtelling  
+Bruker skal kunne angi timer, minutter og sekunder (t,m,s) som skall telles ned. Samt beskjeden som skal gis når nedtellingen er ferdig (msg).   
+I web siden **nedtelling.html** skal man kunne angi en timerId og få se status på den timeren. Dersom timeren ikke er ferdig så skal **nedtelling.html** fortsette å oppdatere seg til tiden har utløpt. **Enhet for tid er hele sekunder**. Serveren skal håndtere nedtellings regnskapet i en egen modul. 
 
-- [ ] Nedtelling  
-Bruker skal kunne angi timer, minutter og sekunder (t,m,s) som skall telles ned. Samt beskjeden som skal gis når nedtellingen er ferdig (msg)
+API
+```http
+POST /api/timer/start body:{"time":Int, "message":String}
+GET /api/timer/{timerId}
 
+```
+Server respons
+```javascript
+// POST /start
+{  "timerId":String }
+// GET /timer/{timerId} (timer not complete)
+{ "remainingTime":Number}
+// GET /timer/{timerId} (timer not complete)
+{ "remainingTime":Number, "message":String}
+```
 
-# Gjør 3 av disse oppgavene (frem til innlevering uke 40)
+### Mynt eller kron?   
+Et verktøy for å slå mynt eller kron uten en mynt. Deltakerene deler en adgangskode og velger mynt eller kron. 
+Når deltaker har valgt avgjør server utfallet.
 
-- [ ] Skrive trener.  
-Lag et programm som viser brukeren en tekst som skal skrives inn. Beregn tiden brukeren tar for å skrive inn hele teksten riktig.
-Gi tilbakemelding når brukeren skriver feil. Gi en oppsummering på slutten av antall trykk per sekund, antall feil osv. Ha varierende 
-norske tekster med ulik vanskilghets grad. Lagre rapport dataen til fil. 
+API
+```http
+GET /api/coinflip/ 
+POST /api/coinflip/choose/ body:{"flipId":String, "choice":Bool}
+GET /api/coinflip/{flipId}
+```
 
-- [ ] Tekst statestikk ++  
-Brukeren skal kunne angi en tekst fil. Scan filen, bereng ord frekvenser, LIX index og Gunning fog index.  
-Generer en rapport basert på det du har beregnet, inkulder annslått lesenivå leseren må ha for å kunne lese teksten. 
-Dersom bruker har angit en output fil, skriv raporten til den filen.  
-
-- [ ] Nedtelling ++
-Bruker skal kunne angi flere timer, minutter og sekunder (t,m,s) som skall telles ned. Samt beskjeden som skal gis når nedtellingen er ferdig (msg)
-Programmet skal ikke blokere terminalen når nedtelling er startet. 
-Programmet skal kunne startes med en fil med nedtellinger og beskejder (en per linje, formatet t,m,s msg)
-Porgrammet skal kunne avsluttes med kommandoen stop.
-
-- [ ] Tre på rad spill.  
-Brukeren skal kunne velge X eller O.  
-Spillet skal støtte 1P og 2P Hotseat.  
-Spillet skal ha en "high score liste" 
-
-- [ ] Snake  
-**Gjør du denne oppgaven så trenger du bare å gjøre en annen oppgave**  
-Implimenter spillet snake for spilling i konsoll. Må ha pickups og vegger etc.
+Server respons
+```javascript
+// GET /api/coinflip/ 
+{  "flipId":String }
+// POST /api/coinflip/choose/
+{ "flipId":String, "choice":Bool }
+// GET /api/coinflip/{flipId}
+{ "res":Bool }
+```
