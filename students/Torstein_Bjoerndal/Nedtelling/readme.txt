@@ -1,0 +1,1 @@
+Velg et tall mellom 2 forhåndsvalgte tall, og prøv å få riktig på færrest mulig forsøk.
