@@ -1,0 +1,5 @@
+- [ ] Nedtelling ++
+Bruker skal kunne angi flere timer, minutter og sekunder (t,m,s) som skall telles ned. Samt beskjeden som skal gis når nedtellingen er ferdig (msg)
+Programmet skal ikke blokere terminalen når nedtelling er startet. 
+Programmet skal kunne startes med en fil med nedtellinger og beskejder (en per linje, formatet t,m,s msg)
+Porgrammet skal kunne avsluttes med kommandoen stop.
