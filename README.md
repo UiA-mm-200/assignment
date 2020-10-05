@@ -8,10 +8,10 @@ På canvas leverer du linken til din PR.
 For alle oppgavene skal Express.js brukes til å skrive serveren.   
 Utover det er det tillat å bruke body-parser.js, men ingen andre tredjeparts bibliotek.  
 
-Sett port for server ved å bruke <code>process.env.PORT || 8080</code>   
+Set port for server ved å bruke <code>process.env.PORT || 8080</code>   
 Det er ikke eksplesitt utledet i alle oppgaver, men det er forventet at serveren gjør meningsfylt feilhåndtering.
 Å ikke ha feilhåndtering er det samme som ikke å ha fulført oppgaven!   
-Det er også forventet at du har et web bruker grensesnitt.    
+Det er også forventet at du har et web bruker grensesnitt for å kunne teste server implementasjonen din.    
 **Server fil skal ALTID hete server.js**    
 **Oppgaver skal altid ligge i sin egen separate mappe under din student mappe**   
 **Følg beskrivelsen av oppgaven nøye, Kommer til å bruke delvis automatiske verktøy til å godkjenne oppgaver.**
@@ -99,3 +99,8 @@ Server respons
 // GET /api/coinflip/{flipId}
 { "res":Bool }
 ```
+
+### Tre på rad
+Lag et 3 på rad spill, hvor serveren er motspilleren.   
+Du bestemer hvordan api skal se ut.   
+NB! Serveren skal kunne håndtere å spille mot flere samtidig så det må du ta høyde for i api'et du lager.
