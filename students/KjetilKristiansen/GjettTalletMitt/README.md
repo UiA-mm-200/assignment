@@ -1,7 +1,7 @@
 # Gjett tallet mitt
 
 ## Bruk:
-Åpne index.html, skriv inn tallet du tror er riktig i input feltet. Trykk på "Sjekk nummer!" knappen
+node gjettTallet.js
 
 ## Eks
-Skriv 4 i input feltet, så trykk på "Sjekk nummer!" knappen
+Skriv 4 i input feltet, så trykk på "ENTER".

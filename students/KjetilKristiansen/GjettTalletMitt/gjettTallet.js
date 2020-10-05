@@ -1,21 +1,46 @@
-let num = 10;
-let myNum = Math.floor(Math.random() * num);
-console.log(myNum);
+const readline = require('readline');
+const rl = readline.createInterface(process.stdin, process.stdout);
 
-let message = "<h2>Gjett tallet mitt, det er mellom " + "0" + " og " + num + "</h2>";
-document.getElementById("message").innerHTML = message;
-
+const num = 10;
+const myNum = Math.floor(Math.random() * num)+1;
 let fails = 0;
-function checkNum(){
-    let userInp = document.getElementById("inpNum").value;
-    if(userInp == myNum){
-        document.write("<h3>Riktig nummer var: " + myNum + "! Du brukte " + fails + " forsøk!</h3>");
-        document.write("<button onClick='location.reload()'>Prøv igjen?</button>")
-        }else if(userInp <= myNum){
-            document.getElementById("gameTxt").innerHTML = "<h3>Høyere enn " + userInp + "</h3>";
-            fails++;
-        }else{
-            document.getElementById("gameTxt").innerHTML = "<h3>Lavere enn " + userInp + "</h3>";
-            fails++;
-        }
-}
+
+console.clear();
+
+rl.setPrompt(`Gjett tallet mitt, det er mellom 1 og ${num}\n\nGjett: `);
+rl.prompt();
+
+rl.on('line', function(input) {
+
+    fails++;
+
+    if(input === "" + myNum) {
+
+        console.clear();
+        console.log(`Riktig nummer var: ${myNum}! Du brukte ${fails} forsøk!`);
+        rl.close();
+
+    }else if(input > "" + myNum){
+
+        console.clear();
+        console.log("Lavere enn " + input);
+        rl.prompt();
+
+    }else if(input < "" + myNum){
+
+        console.clear();
+        console.log("Høyere enn " + input);
+        rl.prompt();
+
+    }
+    else {
+
+        console.clear();
+        rl.prompt();
+
+    }
+}).on('close',function(){
+
+    process.exit(0);
+    
+}); 
