@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="number" id="guess">
+    <button id="guessbt">Gjett</button>
+
+    <script>
+
+        document.getElementById("guessbt").onclick = function () {
+            let guess = document.getElementById("guess").value * 1;
+
+            let body = JSON.stringify({ "guess": guess });
+            let params = {
+                method: 'post',
+                body: body,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+            };
+
+            fetch(`/game/${id}/guess`, params).then(res => {
+
+                if (res.status < 400) {
+                    return res.json()
+                }
+            }).then(state => {
+                console.log(state.msg)
+            })
+        }
+
+        let min, max, id;
+        (function () {
+
+
+            fetch("/start").then(data => {
+                return data.json()
+            }).then(state => {
+                min = state.min;
+                max = state.max;
+                id = state.gameId;
+            })
+        })();
+
+    </script>
+
+
+
+</body>
+
+</html>

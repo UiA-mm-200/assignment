@@ -1,0 +1,1 @@
+Lag et programm som viser brukeren en tekst som skal skrives inn. Beregn tiden brukeren tar for å skrive inn hele teksten riktig. Gi tilbakemelding når brukeren skriver feil. Gi en oppsummering på slutten av antall trykk per sekund, antall feil osv. Ha varierende norske tekster med ulik vanskilghets grad. Lagre rapport dataen til fil.
