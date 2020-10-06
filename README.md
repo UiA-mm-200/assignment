@@ -1,9 +1,9 @@
 # MM-200 Oppgaver [Uke 40, 44]
 
 ## VIKTIG! Hvordan gjøre oppgaver.
-Alle oppgavene skal leveres som PR (pull request) på github (https://github.com/mm-200/assignment).   
-Totalt skal du ha 2 PR, en til onsdagens innlevering og en for modulen (vi er i modul 3 på canvas)   
-På canvas leverer du linken til din PR.
+Onsdag oppgavene skal leveres som PR (pull request) på github (https://github.com/mm-200/assignment).   
+Totalt skal du ha 1 PR. På canvas leverer du linken til din PR.   
+Modul 3 oppgaven krever at du oppretter eget repo på github, På canvas levere du link til det repoet. 
 
 For alle oppgavene skal Express.js brukes til å skrive serveren.   
 Utover det er det tillat å bruke body-parser.js, men ingen andre tredjeparts bibliotek.  
@@ -104,3 +104,35 @@ Server respons
 Lag et 3 på rad spill, hvor serveren er motspilleren.   
 Du bestemer hvordan api skal se ut.   
 NB! Serveren skal kunne håndtere å spille mot flere samtidig så det må du ta høyde for i api'et du lager.
+
+# Modul 3 Oppgaver (til uke 44)
+
+Velg en av disse oppgavene. Antatt arbeidstid er en plass mellom 5 og 15 timer. 
+
+## Hangman
+
+Du skal lage multispiller Hangman spill.   
+Man skal fra en web side kunne starte et nytt spill eller delta i et eksisterende spill.   
+Spillere skal i fra sin egen maskin kunne ta sin tur.   
+Spiller hvem sin tur det ikke er, skal ikke kunne gjøre valg, men se hvordan spillet går.    
+Server skal skrives ved å bruke Express.js   
+Server skal velge ord fra en liste med trygge ord (som du lager).   
+Status for et pågående spill skal lagres i en Postgress sql database.   
+Spille skal hostes på Heroku.   
+   
+Tilatte npm pakker er Express, body-parser og pg
+   
+https://en.wikipedia.org/wiki/Hangman_(game) 
+
+## FlashCards
+
+Du skal lage et verktøy for «FlashCards».   
+Bruker skal kunne lage og endre (kun sine) samlinger med FlashCards fra en web side.    
+Andre brukere skal kunne «bruke» en samling via en URL som unikt identifiserer en samling med kort.    
+Server skal skrives ved å bruke Express.js   
+Kort samlingen skal lagres i en Postgress sql database.   
+Verktøy skal hostes på Heroku.   
+   
+https://en.wikipedia.org/wiki/Flashcard   
+   
+Tilatte npm pakker er Express, body-parser og pg
