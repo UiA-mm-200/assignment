@@ -103,4 +103,3 @@ Server respons
 ### Tre på rad
 Lag et 3 på rad spill, hvor serveren er motspilleren.   
 Du bestemer hvordan api skal se ut.   
-NB! Serveren skal kunne håndtere å spille mot flere samtidig så det må du ta høyde for i api'et du lager.
