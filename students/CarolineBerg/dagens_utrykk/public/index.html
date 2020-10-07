@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">¨
+    <script src="../getDay.js"></script>
+    <title>Public</title>
+</head>
+
+<body>
+    <input id=dayInput type="date"></input>
+    <button id="setDayBtn">set day</button>
+
+    <h2 id="dateToday"></h2>
+    <h2 id="word"></h2>
+    <h3 id="definition"></h3>
+
+    <!-- HTML elements here... -->
+    <div id="container">
+        wdqdqewfqefq
+    </div>
+
+    <script>
+        let dayInput = document.getElementById("dayInput").value;
+        let setDayBtn = document.getElementById("setDayBtn");
+        let dateToday = document.getElementById("dateToday");
+
+
+        setDayBtn.addEventListener('click', function() {
+                dateToday.innerHTML = dayOfyear(dayInput);
+            })
+            /* JavaScript here... */
+    </script>
+
+</body>
+
+
+
+</html>
