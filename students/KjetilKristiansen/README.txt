@@ -1,0 +1,1 @@
+# Kjetil Kristiansen sin mappe :)

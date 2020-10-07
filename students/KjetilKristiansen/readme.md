@@ -1,1 +1,0 @@
-# Kjetil Kristiansen
