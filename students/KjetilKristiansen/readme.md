@@ -1,1 +1,1 @@
-#Kjetil Kristiansen som student
+# Kjetil Kristiansen
