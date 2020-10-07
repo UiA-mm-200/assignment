@@ -7,4 +7,3 @@ node tekstGen.js 4
 
 ## Eks
 node tekstGen.js 4
-test
