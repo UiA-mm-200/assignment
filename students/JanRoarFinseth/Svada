@@ -1,0 +1,21 @@
+let tekst = [
+    "Du kan komme langt i livet med å være vennlig.",
+    "Klarer du å skaffe deg venner så blir du ikke så ensom.",
+    "Det finnes alltid noen som vil snakke med deg.",
+    "En idé kan være å smile.",
+    "Vipps så har du en venn."
+];
+
+let xAvsnitt = tekst.length;
+if (process.argv.length >= 3) {
+    xAvsnitt = process.argv[2];
+}
+
+let index = 0;
+for (let i = 0; i < xAvsnitt; i++) {
+    if (index >= tekst.length) {
+        index = 0;
+    }
+    console.log(tekst[index]);
+    index++;
+} 
