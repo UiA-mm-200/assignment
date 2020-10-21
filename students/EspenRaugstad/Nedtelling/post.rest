@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/timer/start
+Content-Type: application/json
+
+{
+    "time": 50,
+    "message": "Timer 3"
+}

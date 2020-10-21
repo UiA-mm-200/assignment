@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTU</title>
+</head>
+<body>
+    <div id="container">
+        <h1>Dagens tekniske uttrykk</h1>
+
+        <label for="dato">Velg dato:</label>
+        <br><br>
+        <input type="date" id="dato" name="trip-start"
+            value="">
+        <br><br><br><br>
+        <button id="btn1">Hent dagens uttrykk</button>  
+        <br>
+        <p>Dagens ord: <span id="dagensOrd"></span></p>
+        <br>
+        <p>Forklaring: <span id="forklaring"></span></p>
+        
+    </div>
+
+    <script>
+
+        let btn1 = document.getElementById('btn1');
+        let dagensOrd = document.getElementById('dagensOrd');
+        let forklaring = document.getElementById('forklaring');
+        let dato = document.getElementById('dato');  
+              
+
+        btn1.addEventListener("click", () => {
+            //Dagens dato og måned.
+            let date, month;
+            if(!dato.value){
+                let today = new Date();
+                date = today.getDate();
+                month = today.getMonth();
+            } else {
+                let datoArray = dato.value.split("-");
+                date = datoArray[2];
+                month = datoArray[1];
+            }
+            
+            //Koble opp til api og hente ord og uttrykk
+            fetch(`/api/wordOfTheDay/${date}.${month}`)
+                .then(respons => {
+                    return respons.json();
+                })
+                .then(data => {
+                    dagensOrd.innerHTML = data.word;
+                    forklaring.innerHTML = data.description;
+                });
+        })
+
+    </script>
+
+</body>
+
+<style>
+    h1, label, input {
+        font-family: sans-serif;
+    }
+
+    p {
+        font-family: sans-serif;
+    }
+
+    button {
+        font-family: sans-serif;
+        font-size: 12pt;
+        width: 200px;
+        line-height: 2em;
+        border-radius: 15px; 
+        border: 1px solid black;
+        margin: 10px 0px;  
+    }
+
+    label{
+        margin: 10px 0px;
+    }
+    
+    input{
+        margin-bottom: 10px;
+        width: 120px;
+        font-size: 12pt;
+    }
+
+    #container {
+        display: grid;
+        margin: auto;
+        justify-content: center;
+        background-color: goldenrod;
+        border-radius: 20px;
+        width: 50%;
+        padding: 10px;
+    }
+</style>
+</html>

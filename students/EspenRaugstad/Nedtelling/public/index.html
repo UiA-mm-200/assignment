@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Countdown Timer</title>
+</head>
+<body>
+    <h1>Nedtelling</h1>
+    <div id="countdownInput">
+        <p>Skriv  inn tt:mm:ss samt en beskjed når nedtellingen er ferdig.</p>
+        <input id="hours" type="number" />:
+        <input id="minutes" type="number" />:
+        <input id="seconds" type="number" />
+        <br><br>
+        <label for="message">Skriv inn beskjed: </label>
+        <input id="message" type="text" />
+        <br><br>
+        <button id="startCountdown">Start Nedtelling</button>
+    </div>
+    <hr>
+    <div id="countdownTimer">
+        <label for="timerID">Velg en timer å vise:</label>
+
+        <select name="timers" id="timerID">
+            <option value="">--Velg timer ID--</option>
+        </select>
+
+        <br><br>
+        <button id="getTimer">Hent nedtellinger</button>
+        <br>
+        <br>
+        <div>Gjenværende tid er: <span id='remainingTime'></span></div>
+        <div id="messageOut"></div>
+    </div>
+</body>
+<script>
+    //********** LAG TIMER ************
+    let hours = document.getElementById('hours');
+    let minutes = document.getElementById('minutes');
+    let seconds = document.getElementById('seconds');
+    let message = document.getElementById('message');
+    let startCountdown = document.getElementById('startCountdown');
+
+    //*********** HENT TIMER **********
+    let timerID = document.getElementById('timerID');
+    let getTimer = document.getElementById('getTimer');
+    let remainingTime = document.getElementById('remainingTime');
+    let messageOut = document.getElementById('messageOut');
+
+
+    //************** EVENT LISTENERS **************
+    let timers = [];
+    getTimer.addEventListener('click', async()=>{
+        const url = '/api/getTimers';
+        
+        let response = await fetch(url);
+        let data = await response.json();
+        console.log(data.ids);
+
+        timerID.innerHTML = `<option value="">--Velg timer ID--</option>`;
+
+        for(id of data.ids){
+            let option = document.createElement('option');
+            option.text = `Timer nummer ${id}`;
+            option.value = id;
+            timerID.add(option);
+        }
+
+    });
+
+    
+    timerID.addEventListener('change', async ()=>{
+
+        console.log(timerID);
+
+        const url = `/api/timer/${timerID.value}`;
+
+        let response = await fetch(url);
+        let data = await response.json();
+
+        let time = parseInt(data.remainingTime);
+        console.log(time);
+
+        let h = Math.trunc(time/3600);
+        let m = Math.trunc(time/60) - 60*h;
+        let s = time - 60*m - 3600*h;
+
+        if(h < 10){
+            h = "0"+h.toString();
+        }
+        if(m < 10){
+            m = "0"+m.toString();
+        }
+        if(s < 10){
+            s = "0"+s.toString();
+        }
+
+        //Gjør det fint ved å legge til 0 hvis m eller s er mindre enn 10.
+
+        remainingTime.innerText = `${h}:${m}:${s}`;
+
+        messageOut.innerText = data.message;
+
+    });
+
+    startCountdown.addEventListener('click', async ()=>{
+        let h = parseInt(hours.value);
+        let m = parseInt(minutes.value);
+        let s = parseInt(seconds.value);
+
+        let time = s + m*60 + h*3600;
+
+        //Send til server
+        const url = '/api/timer/start';
+        
+        let body = {
+            time: time,
+            message: message.value
+        }
+
+        let headers = {
+            "content-type": 'application/json'
+        }
+
+        let config = {
+            method: 'post',
+            body: JSON.stringify(body),
+            headers: headers 
+        }
+
+        let response = await fetch(url, config);
+        let data = await response.json();
+        console.log(data.timerID);
+
+
+    });
+
+</script>
+
+</html>
