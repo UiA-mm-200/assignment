@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svada 2</title>
+</head>
+<body>
+    
+    <h1>Svadagenerator</h1>
+    <label for="inp1">Antall avsnitt: </label>
+    <input id="inp1" type="number" />
+    <button id="btn1">Generer</button>
+    <br><br>
+    <hr>
+    <div id="paragraphs"></div>
+
+    <script>
+
+        let inp1 = document.getElementById('inp1');
+        let btn1 = document.getElementById('btn1');
+        let paragraphs = document.getElementById('paragraphs');
+
+        btn1.addEventListener("click", async ()=>{
+            paragraphs.innerHTML = "";
+
+            let numberOfParagraphs;
+            if(inp1.value === ""){
+                numberOfParagraphs = 3;
+            } else {
+                numberOfParagraphs = inp1.value;
+
+            }
+            
+            const url = `/api/randomText/${numberOfParagraphs}`;
+
+            let response = await fetch(url);
+            let data = await response.json();
+            
+            for(let paragraph of data.paragraphs){
+                paragraphs.innerHTML += (paragraph+"<br><br>");
+            }
+
+
+        });
+
+    </script>
+</body>
+</html>
