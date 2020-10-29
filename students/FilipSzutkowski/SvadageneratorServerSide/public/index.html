@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svada tekst generator!</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="wrapper">
+        <label for="paragraphs">Antall avsnitt:</label>
+        <input type="text" id="paragraphs">
+        <button id="generate">Generer</button>
+        <div id="svadaText"></div>
+    </div>
+
+    <script>
+
+        document.querySelector('#generate').onclick = () => {
+            let paragraphs = document.querySelector('#paragraphs').value;
+            let paragraphsDiv = document.querySelector('#svadaText');
+            paragraphsDiv.textContent = "";
+            
+            try {
+                (async () => {
+                    let response = await fetch(`/${paragraphs}`)
+                    let data = await response.json();
+                    let paragraphsList = data.paragraphs;
+
+                    paragraphsList.forEach(paragraph => {
+                        let paragraphElm = document.createElement('p');
+                        paragraphElm.textContent = paragraph;
+                        paragraphsDiv.appendChild(paragraphElm);
+                    });
+                })();
+
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+    </script>
+</body>
+</html>

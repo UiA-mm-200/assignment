@@ -1,0 +1,23 @@
+The file industry codes.txt on the RCV1 CD-ROMs lists a total of 870 codes. Most do not appear
+in the documents and at first glance they appear confusing and redundant. As discussed below, only
+354 of these codes appear to have been available for use by the coders. We therefore recommend
+that only these 354 codes (which we list in Online Appendix 4) be used in experiments.
+Of the 354 valid Industry codes, 350 have at least one occurrence in the corpus(in both RCV1-v1
+and RCV1-v2). Nonzero category frequencies range from two for I5020030 (RESERVOIR CONSTRUCTION) and I5020050 (SEA DEFENCE CONSTRUCTION) to 34,788 (34,775 in RCV1-v2)
+for I81402 (COMMERCIAL BANKING). In contrast to Topic and Region codes, Industry codes
+were not required to be assigned. Only a subset of documents (351,812 for RCV1-v1 and 351,761
+for RCV1-v2) have them.
+The Industry codes incorporate many fine-grained distinctions in subject matter. (For instance,
+there are five variations on the real estate industry.) They may therefore provide a test of the ability
+of text categorization systems to distinguish small differences in content.
+As with Topics, the Industry code symbols encode both a hierarchy and a numeric sort order.
+The hierarchy was used for automated assignment of ancestor categories, though these automated
+assignments were imperfectly preserved in RCV1 (Section 3.5.2). In addition, some use of relationships between codes for companies (not present in the RCV1 CD-ROMs) and codes for Industries
+was used during automated assignment of Industries.
+Several anomalies of the morphology of the Industry code symbols, and in the way the codes
+were used, make the relationships among codes hard to discern. We first discuss these anomalies,
+and then how to deal with them for experimental purposes.
+Anomaly 1: The legacy editing interface used by coders required Industry code symbols to
+be either six or eight characters, regardless of hierarchy position. For instance, here is a subset of
+the codes in the form that editors apparently conceived of them (we indent the codes to indicate
+hierarchical structure):

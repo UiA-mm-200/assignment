@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer!</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+    <section class="setTimer">
+        <input type="number" id="h" placeholder="Hours">
+        <input type="number" id="m" placeholder="Minutes">
+        <input type="number" id="s" placeholder="Seconds">
+        <input type="text" id="message" placeholder="Message when complete">
+        <button id="setTimer">Set timer!</button>
+        <article id="timerIdOut"></article>
+    </section>
+
+    <hr>
+
+    <section class="getTimer">
+        <input type="text" id="timerIdInp" placeholder="Enter ID of your timer">
+        <button id="getTimer">Get timer!</button>
+        <article id="timers"></article>
+        <article id="messageBox"></article>
+    </section>
+
+    <script>
+
+        const setTimerBtn = document.querySelector('#setTimer');
+        const getTimerBtn = document.querySelector('#getTimer');
+        const userHours = document.querySelector('#h');
+        const userMinutes = document.querySelector('#m');
+        const userSeconds = document.querySelector('#s');
+        const timerIdInp = document.querySelector('#timerIdInp');
+        const timerIdOut = document.querySelector('#timerIdOut');
+        const timersElm = document.querySelector('#timers');
+        const userMessage = document.querySelector('#message');
+        const messageBox = document.querySelector('#messageBox');
+
+        setTimerBtn.onclick = () => {
+            
+            const timeSet = new Date();
+            const hours = parseInt(userHours.value) || 0;
+            const minutes = parseInt(userMinutes.value) || 0;
+            const seconds = parseInt(userSeconds.value) || 0;
+
+            timeSet.setHours(timeSet.getHours() + hours);
+            timeSet.setMinutes(timeSet.getMinutes() + minutes);
+            timeSet.setSeconds(timeSet.getSeconds() + seconds);
+
+            const updata = {
+                time: timeSet.getTime(),
+                message: userMessage.value || 'Timer complete!'
+            };
+
+            const cfg = {
+                method: 'POST',
+                headers : {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(updata)
+            };
+
+            (async () => {
+                const response = await fetch('/start', cfg);
+                const data = await response.json();
+                timerIdOut.textContent = `Your timer's ID is: ${data}`
+            })();
+
+
+        };
+
+        getTimerBtn.onclick = () => {
+
+            (async () => {
+                const response = await fetch(`/timer/${timerIdInp.value}`);
+                const data = await response.json();
+
+                if (data.msg && !data.remainingTime) {
+                    messageBox.textContent = `Message: ${data.msg}`;
+                    return
+                }
+
+                const dateObj = new Date();
+                const timerElm = document.createElement('div')
+                let remainingTime = parseInt(data.remainingTime);
+
+                const timeout = setTimeout(() => {
+                    clearInterval(interval);
+                    timerElm.textContent = `Message from timer: ${data.msg}`;
+                }, remainingTime + 1000);
+
+                dateObj.setTime(dateObj.getTime() + remainingTime)
+                timersElm.appendChild(timerElm);
+                
+                const interval = setInterval(() => {
+
+                    const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                    timerElm.textContent = `${hours}h : ${minutes}m : ${seconds}s`
+
+                    remainingTime -= 1000;
+                    
+                }, 1000)
+
+            })();
+        };
+
+        
+        
+
+    </script>
+
+</body>
+</html>

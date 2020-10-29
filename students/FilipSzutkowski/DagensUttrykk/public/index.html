@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Dagens tekniske uttrykk!</title>
+		<style>
+				body {
+						font-family: sans-serif;
+				}
+		</style>
+</head>
+<body>
+		<h3>Todays Word</h3>
+		<input type="date" id="dateInput"> <br>
+		<button id="getDate">Get word</button>
+		<h3 id="wordOfTheDay"></h3>
+		<p id="descriptionOfWord"></p>
+
+		<script>
+				const dateInput = document.querySelector('#dateInput');
+				let dateObj = new Date();
+				dateInput.valueAsDate = dateObj;
+
+
+				document.querySelector('#getDate').onclick = () => {
+						let word, description;
+						dateObj.setTime(dateInput.valueAsDate);
+						dateObj.setHours(0,0,0,0);
+
+						try {
+							 fetch(`/${dateObj.getTime()}`).then(res => {
+									 return res.json();
+							 }).then(state => {
+									 word = state.word;
+									 description = state.description;
+									 
+									 document.querySelector('#wordOfTheDay').textContent = word;
+									 document.querySelector('#descriptionOfWord').textContent = description;
+							 });
+						} catch (err) {
+							 console.log(err);
+						}
+				}
+
+		</script>
+</body>
+</html>
