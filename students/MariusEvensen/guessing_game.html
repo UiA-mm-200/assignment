@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Geussing Game</title>
+</head>
+<body>
+
+    <input id="guessnumber" type="text">
+
+    <input id="guessbutton" type="button" value="Guess" onclick="makeGuess()">
+    Guess a number between 1 and 20:)
+
+    <p id="guessClose"></p>
+
+    <p id="tries">Tries: 0 </p> 
+
+
+<script>
+
+    function randomNumber(max){
+        return Math.floor(Math.random()*max);
+    }
+    var x = randomNumber(20);
+    var z = 0;
+
+    function makeGuess(){
+        if(document.getElementById('guessbutton').value=="Guess")
+        {
+            var y = document.getElementById('guessnumber').value;
+            if(x>y)
+            document.getElementById('guessClose').innerHTML="Go higher!";
+            else if(x<y)
+            document.getElementById('guessClose').innerHTML="Go lower!";
+            else
+            {
+            document.getElementById('guessClose').innerHTML="You got it!:D";
+            document.getElementById('guessbutton').value="Play again:)";
+            document.getElementById('tries').innerHTML="Tries used:"+z;
+            }
+        
+        z++;
+        document.getElementById('tries').innerHTML="Tries so far:"+z;
+    }
+    else 
+    {
+        z=0;
+        x = randomNumber(20);
+        document.getElementById('guessClose').innerHTML="Go higher!";
+        document.getElementById('tries').innerHTML="Tries used:"+z;
+    }
+    }
+
+</script>
+    
+</body>
+
+
+
+</html> 

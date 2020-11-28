@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Svada Generator</title>
+</head>
+<body>
+
+<p>Length: <input type="text" id="length"/> 
+        <button id="write">Generate words</button></p> 
+        (Max 700 words)
+        <p></p>
+        
+        <div id="allwords"></div>
+
+    <script>  
+var generateWords = function(len) {
+
+    var words = [ 'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong',
+    'bla', "blaaaa", "bleh", 'ja', 'kanskje', 'nei', 'filler', 'ord', 'word', 'lala', 'sama', 'sima', 'badabing', 'badabong', 'whoopa'];
+
+    
+    
+    var wordCount = (len > words.length) ? (words.length - 1) : len;
+    var extracted = [];
+
+    for (var i = 0; i < wordCount; i++) {
+
+        var word = Math.floor(Math.random() * words.length);
+
+        extracted[i] = words[word];
+
+
+    }
+
+    return extracted.join(' ');
+
+};
+
+
+var write = document.getElementById('write'),
+    length = document.getElementById('length'),
+    allwords = document.getElementById('allwords');
+
+    write.addEventListener('click', function() {
+    var len = length.value;
+    var text = generateWords(len);
+    allwords.innerHTML = text;
+    }, false);
+
+    </script>
+    
+</body>
+
+
+
+</html>
